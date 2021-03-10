@@ -1,5 +1,10 @@
 package com.yang.service;
 
+import com.yang.model.Player;
+
+import java.util.List;
+import java.util.Map;
+
 public interface PlayService {
     /**
      * 重置各容器
@@ -21,4 +26,8 @@ public interface PlayService {
      * @return
      */
     Boolean play(Integer seatCode, String playCards);
+
+    List<Player> getUserInfo();
+
+    Map<String, Long> surplus();
 }

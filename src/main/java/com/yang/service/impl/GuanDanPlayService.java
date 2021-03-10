@@ -96,6 +96,17 @@ public class GuanDanPlayService implements PlayService {
         return Boolean.TRUE;
     }
 
+    @Override
+    public List<Player>  getUserInfo() {
+        return playerList;
+    }
+
+    @Override
+    public Map<String, Long> surplus() {
+        return cardList.stream().collect(Collectors.groupingBy(CardEnum::getNumber,
+                                                               Collectors.counting()));
+    }
+
     private void cardListRemove(List<CardEnum> playCardList) {
         loop:
         for (Iterator<CardEnum> playCardListIterator = playCardList.iterator(); playCardListIterator.hasNext(); ) {

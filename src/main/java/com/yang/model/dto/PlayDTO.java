@@ -1,5 +1,7 @@
 package com.yang.model.dto;
 
+import com.alibaba.fastjson.JSON;
+
 public class PlayDTO {
     //打牌人的位置code,对应SeatEnum的code
     private Integer seatCode;
@@ -33,5 +35,10 @@ public class PlayDTO {
 
     public void setChannelId(String channelId) {
         this.channelId = channelId;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

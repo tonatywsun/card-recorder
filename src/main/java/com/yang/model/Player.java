@@ -1,5 +1,6 @@
 package com.yang.model;
 
+import com.alibaba.fastjson.JSON;
 import com.yang.enumer.CardEnum;
 import com.yang.enumer.SeatEnum;
 
@@ -76,5 +77,10 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(seat);
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }
