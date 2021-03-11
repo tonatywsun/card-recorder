@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2021/3/10 17:43
  */
 @Controller
-@RequestMapping("/page")
 public class PageController {
     @RequestMapping("/indexPage")
     public String indexPage(ModelMap modelMap) {
-        modelMap.put("url", "http://127.0.0.1:9091/play/reset?channelId=guanDan");
+        modelMap.put("url", "/play/reset?channelId=guanDan");
         return "index";
     }
 }

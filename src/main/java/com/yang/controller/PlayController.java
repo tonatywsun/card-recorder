@@ -16,31 +16,31 @@ public class PlayController {
     private PlayServiceFactory factory;
 
     //开始/重置接口
-    @GetMapping("/reset")
-    public Boolean reset(@RequestParam String channelId) {
-        return factory.getService(channelId).reset();
+    @PostMapping("/reset")
+    public Boolean reset(@RequestBody PlayDTO play) {
+        return factory.getService(play.getChannelId()).reset();
     }
 
     //设置第一个出牌的人接口
-    @GetMapping("/setFirstPlay")
+    @PostMapping("/setFirstPlay")
     public Boolean setFirstPlay(@RequestBody PlayDTO play) {
         return factory.getService(play.getChannelId()).setFirstPlay(play.getSeatCode());
     }
 
     //打牌接口
-    @GetMapping("/play")
+    @PostMapping("/play")
     public Boolean play(@RequestBody PlayDTO play) {
         return factory.getService(play.getChannelId()).play(play.getSeatCode(), play.getPlayCards());
     }
 
     //获取每个人信息接口
-    @GetMapping("/getUserInfo")
+    @PostMapping("/getUserInfo")
     public String getUserInfo(@RequestBody PlayDTO play) {
         return JSON.toJSONString(factory.getService(play.getChannelId()).getUserInfo());
     }
 
     //获取剩余的牌接口
-    @GetMapping("/surplus")
+    @PostMapping("/surplus")
     public String surplus(@RequestBody PlayDTO play) {
         return JSON.toJSONString(factory.getService(play.getChannelId()).surplus());
     }
