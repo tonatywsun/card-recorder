@@ -12,38 +12,10 @@
     <title>手动记牌器</title>
 </head>
 <body>
-    <div>第一个出牌的人:<input type="text" name="setFirstPlayText" id="setFirstPlayText"/>
-    </div>
-    <div align="10px">
-        <button type="button" id="resetButton" onclick="reset('${url}')" >重置</button>
-        <button type="button" id="submitButton" onclick="submit()">确定</button>
-    </div>
+    <form name="setFirstPlayForm" action="/play/setFirstPlay">
+        <input type="text" name="channelId" hidden value="guanDan"/>
+        <div>第一个出牌的人:<input type="text" name="seatCode"/>
+        <input type="submit">
+    </form>
 </body>
-<script type="text/javascript">
-
-    function submit(){
-        var firstPlay = $("#setFirstPlayText").val();
-        alert(firstPlay);
-    }
-
-    function reset(url) {
-        $("#setFirstPlayText").val('');
-        var data = {"channelId": "guanDan"};
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: JSON.stringify(data),
-            dataType: "json",
-            scriptCharset: 'UTF-8',
-            processData: false,
-            contentType: "application/json",
-            sync: false,
-            success: function (data) {
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
-    }
-</script>
 </html>

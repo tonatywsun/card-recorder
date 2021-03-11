@@ -1,7 +1,6 @@
 package com.yang.model;
 
 import com.alibaba.fastjson.JSON;
-import com.yang.enumer.CardEnum;
 import com.yang.enumer.SeatEnum;
 
 import java.util.List;
@@ -16,9 +15,9 @@ public class Player {
     //这个玩家第几个出牌
     private Integer playOrder;
     //这个玩家没有打过的牌
-    private List<CardEnum> unPlayCardList;
+    private List<String> unPlayCardList;
     //这个玩家打过哪些牌
-    private List<Play> playList;
+    private List<String> playList;
     //这个玩家剩余牌数
     private Integer remainder;
 
@@ -38,19 +37,19 @@ public class Player {
         this.playOrder = playOrder;
     }
 
-    public List<CardEnum> getUnPlayCardList() {
+    public List<String> getUnPlayCardList() {
         return unPlayCardList;
     }
 
-    public void setUnPlayCardList(List<CardEnum> unPlayCardList) {
+    public void setUnPlayCardList(List<String> unPlayCardList) {
         this.unPlayCardList = unPlayCardList;
     }
 
-    public List<Play> getPlayList() {
+    public List<String> getPlayList() {
         return playList;
     }
 
-    public void setPlayList(List<Play> playList) {
+    public void setPlayList(List<String> playList) {
         this.playList = playList;
     }
 
