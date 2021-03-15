@@ -1,6 +1,5 @@
 package com.yang.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.yang.factory.PlayServiceFactory;
 import com.yang.service.PlayService;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +55,7 @@ public class PlayController {
         }
         PlayService service = factory.getService(channelId);
         service.play(seatCode, playCards);
-        modelMap.put("userInfo", JSON.toJSONString(service.getUserInfo()));
+        modelMap.put("userInfo", service.getUserInfo());
         modelMap.put("surplus", service.surplus());
         return "data";
     }

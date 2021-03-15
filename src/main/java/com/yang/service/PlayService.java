@@ -2,7 +2,6 @@ package com.yang.service;
 
 import com.yang.model.Player;
 
-import java.util.List;
 import java.util.Map;
 
 public interface PlayService {
@@ -27,7 +26,7 @@ public interface PlayService {
      */
     Boolean play(Integer seatCode, String playCards);
 
-    List<Player> getUserInfo();
+    Map<Integer, Player> getUserInfo();
 
     Map<String, Long> surplus();
 }

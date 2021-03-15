@@ -22,13 +22,33 @@
         <input type="submit">
     </form>
     <div>
-        <#if userInfo??>${userInfo}</#if>
+        <#if userInfo??>
+            <table frame="box" rules="all" style="border-collapse:collapse">
+                <#list userInfo?keys as key>
+                    ${userInfo[1].playOrder}
+                </#list>
+            </table>
+        </#if>
     </div>
     <div>
     <#if surplus??>
-            <#list surplus?keys as key>
-                ${key}---${surplus[key]}
-            </#list>
+        <table frame="box" rules="all" style="border-collapse:collapse">
+            <tr>
+                <th>
+                    <span>牌</span>
+                </th>
+                <#list surplus?keys as key>
+                    <th>
+                        <span><#if key=='0'>10<#elseif key=='X'>小王<#elseif key=='D'>大王<#else>${key}</#if></span>
+                    </th>
+                </#list>
+            </tr>
+            <tr>
+                <td>张数</td>
+                <#list surplus?keys as key>
+                    <td>${surplus[key]}</td>
+                </#list>
+            </tr>
         </#if>
     </div>
 </body>

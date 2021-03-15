@@ -100,8 +100,8 @@ public class GuanDanPlayService implements PlayService {
     }
 
     @Override
-    public List<Player> getUserInfo() {
-        return playerList;
+    public Map<Integer, Player> getUserInfo() {
+        return playerList.stream().collect(Collectors.toMap(Player::getPlayOrder, y -> y));
     }
 
     @Override
