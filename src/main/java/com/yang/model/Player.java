@@ -16,6 +16,7 @@ public class Player {
     private Integer playOrder;
     //这个玩家没有打过的牌
     private List<String> unPlayCardList;
+    private String unPlayCard;
     //这个玩家打过哪些牌
     private List<String> playList;
     //这个玩家剩余牌数
@@ -71,6 +72,14 @@ public class Player {
         }
         Player player = (Player) o;
         return seat == player.seat;
+    }
+
+    public String getUnPlayCard() {
+        return unPlayCard;
+    }
+
+    public void setUnPlayCard(String unPlayCard) {
+        this.unPlayCard = unPlayCard;
     }
 
     @Override

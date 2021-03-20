@@ -1,6 +1,7 @@
 package com.yang.controller;
 
 import com.yang.factory.PlayServiceFactory;
+import com.yang.model.Player;
 import com.yang.service.PlayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 /**
  * 打牌Controller类
@@ -38,24 +41,16 @@ public class PlayController {
     public String play(@RequestParam String channelId, @RequestParam String playCards1,
                        @RequestParam String playCards2, @RequestParam String playCards3,
                        @RequestParam String playCards4, ModelMap modelMap) {
-        Integer seatCode = 0;
-        String playCards = "";
-        if (StringUtils.isNotBlank(playCards1)) {
-            seatCode = 1;
-            playCards = playCards1;
-        } else if (StringUtils.isNotBlank(playCards2)) {
-            seatCode = 2;
-            playCards = playCards2;
-        } else if (StringUtils.isNotBlank(playCards3)) {
-            seatCode = 3;
-            playCards = playCards3;
-        } else if (StringUtils.isNotBlank(playCards4)) {
-            seatCode = 4;
-            playCards = playCards4;
-        }
         PlayService service = factory.getService(channelId);
-        service.play(seatCode, playCards);
-        modelMap.put("userInfo", service.getUserInfo());
+        service.play(1, playCards1);
+        service.play(2, playCards2);
+        service.play(3, playCards3);
+        service.play(4, playCards4);
+        Map<Integer, Player> userInfo = service.getUserInfo();
+        modelMap.put("user1Info", userInfo.get(1));
+        modelMap.put("user2Info", userInfo.get(2));
+        modelMap.put("user3Info", userInfo.get(3));
+        modelMap.put("user4Info", userInfo.get(4));
         modelMap.put("surplus", service.surplus());
         return "data";
     }

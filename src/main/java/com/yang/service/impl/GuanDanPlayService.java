@@ -45,6 +45,7 @@ public class GuanDanPlayService implements PlayService {
         Player player1 = new Player();
         player1.setPlayList(new ArrayList<>());
         player1.setPlayOrder(1);
+        player1.setUnPlayCard("34567890JQKA2XD");
         player1.setRemainder(remainder);
         player1.setSeat(seat);
         player1.setUnPlayCardList(new ArrayList<>(unPlayCardList));
@@ -53,6 +54,7 @@ public class GuanDanPlayService implements PlayService {
         Player player2 = new Player();
         player2.setPlayList(new ArrayList<>());
         player2.setPlayOrder(2);
+        player2.setUnPlayCard("34567890JQKA2XD");
         player2.setRemainder(remainder);
         player2.setSeat(seat2);
         player2.setUnPlayCardList(new ArrayList<>(unPlayCardList));
@@ -60,6 +62,7 @@ public class GuanDanPlayService implements PlayService {
         SeatEnum seat3 = SeatEnum.getByCode(seatCode > 4 ? seatCode - 4 : seatCode);
         Player player3 = new Player();
         player3.setPlayList(new ArrayList<>());
+        player3.setUnPlayCard("34567890JQKA2XD");
         player3.setPlayOrder(3);
         player3.setRemainder(remainder);
         player3.setSeat(seat3);
@@ -69,6 +72,7 @@ public class GuanDanPlayService implements PlayService {
         Player player4 = new Player();
         player4.setPlayList(new ArrayList<>());
         player4.setPlayOrder(4);
+        player4.setUnPlayCard("34567890JQKA2XD");
         player4.setRemainder(remainder);
         player4.setSeat(seat4);
         player4.setUnPlayCardList(new ArrayList<>(unPlayCardList));
@@ -82,6 +86,9 @@ public class GuanDanPlayService implements PlayService {
 
     @Override
     public Boolean play(Integer seatCode, String playCards) {
+        if (StringUtils.isNotBlank(playCards)) {
+            playCards = playCards.toUpperCase();
+        }
         Player player = seat2PlayerMap.get(SeatEnum.getByCode(seatCode));
         if (StringUtils.isBlank(playCards)) {
             player.getPlayList().add("");
@@ -95,6 +102,11 @@ public class GuanDanPlayService implements PlayService {
         player.setRemainder(player.getRemainder() - playCardList.size());
         player.getPlayList().add(playCards);
         player.getUnPlayCardList().removeAll(playCardList);
+        String str = "";
+        for (String s : player.getUnPlayCardList()) {
+            str += s;
+        }
+        player.setUnPlayCard(str);
         cardListRemove(new ArrayList<>(playCardList));
         return Boolean.TRUE;
     }
@@ -106,7 +118,24 @@ public class GuanDanPlayService implements PlayService {
 
     @Override
     public Map<String, Long> surplus() {
-        return cardList.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+        Map<String, Long> surplus = cardList.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+        Map<String, Long> map = new LinkedHashMap();
+        map.put("3", Optional.ofNullable(surplus.get("3")).orElse(0L));
+        map.put("4", Optional.ofNullable(surplus.get("4")).orElse(0L));
+        map.put("5", Optional.ofNullable(surplus.get("5")).orElse(0L));
+        map.put("6", Optional.ofNullable(surplus.get("6")).orElse(0L));
+        map.put("7", Optional.ofNullable(surplus.get("7")).orElse(0L));
+        map.put("8", Optional.ofNullable(surplus.get("8")).orElse(0L));
+        map.put("9", Optional.ofNullable(surplus.get("9")).orElse(0L));
+        map.put("0", Optional.ofNullable(surplus.get("0")).orElse(0L));
+        map.put("J", Optional.ofNullable(surplus.get("J")).orElse(0L));
+        map.put("Q", Optional.ofNullable(surplus.get("Q")).orElse(0L));
+        map.put("K", Optional.ofNullable(surplus.get("K")).orElse(0L));
+        map.put("A", Optional.ofNullable(surplus.get("A")).orElse(0L));
+        map.put("2", Optional.ofNullable(surplus.get("2")).orElse(0L));
+        map.put("X", Optional.ofNullable(surplus.get("X")).orElse(0L));
+        map.put("D", Optional.ofNullable(surplus.get("D")).orElse(0L));
+        return map;
     }
 
     private void cardListRemove(List<String> playCardList) {

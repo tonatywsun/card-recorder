@@ -4,10 +4,10 @@ package com.yang.enumer;
  * 位置枚举类，写死最多只有四个人
  */
 public enum SeatEnum {
-    upper(3, "上"),
-    Left(4, "左"),
-    right(2, "右"),
-    lower(1, "我");
+    对(3, "对"),
+    左(4, "左"),
+    右(2, "右"),
+    我(1, "我");
 
     SeatEnum(Integer code, String seat) {
         this.code = code;
